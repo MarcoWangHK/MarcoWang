@@ -1,0 +1,44 @@
+---
+driver:
+  name: vagrant
+
+provisioner:
+  name: chef_solo
+
+platforms:
+  - name: ubuntu-14.04
+    driver_config:
+      box: 'ubuntu/trusty64'
+      customize:
+        memory: 2048
+    attributes:
+      zookeeper:
+        service_style: "upstart"
+      apache_kafka:
+        service_style: "upstart"
+  - name: debian-7.8
+    driver_config:
+      box: 'chef/debian-7.8'
+      customize:
+        memory: 2048
+    run_list:
+      - recipe[runit]
+    attributes:
+      zookeeper:
+        service_style: "runit"
+      apache_kafka:
+        service_style: "init.d"
+
+suites:
+  - name: default
+    run_list:
+      - recipe[apt]
+      - recipe[zookeeper]
+      - recipe[zookeeper::service]
+      - recipe[apache_kafka]
+    attributes:
+      apt:
+        compile_time_update: true
+      apache_kafka:
+        jmx:
+          port: 9093
