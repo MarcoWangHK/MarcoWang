@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: test-stack
-# Recipe:: default
+# Recipe:: java
 #
 #
 
