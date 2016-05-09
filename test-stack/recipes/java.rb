@@ -15,7 +15,7 @@ execute "java1" do
 end
 
 execute "java2" do
-  command "echo "oracle-java8-installer shared/accepted-oracle-license-v1-1 select true" | sudo debconf-set-selections"
+  command "echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | sudo debconf-set-selections"
   action :run
 end  
 
