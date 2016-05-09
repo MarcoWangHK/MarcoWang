@@ -20,6 +20,6 @@ execute "java-install2" do
 end
 
 execute "java-install3" do
-  command "sudo apt-get -y install oracle-java8-installer"
+  command "sudo apt-get update && sudo apt-get -y install oracle-java8-installer"
   action :run
 end
