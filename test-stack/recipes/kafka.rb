@@ -26,6 +26,6 @@ end
 
 execute "cd" do
   command "cd /opt/kafka"
-  command "sudo tar -xvzf /home/kafka/kafka.tgz --strip 1"
+  command "sudo tar -xvzf /home/Downloads/kafka.tgz --strip 1"
   action :run
 end
