@@ -1,0 +1,89 @@
+#!/bin/bash
+
+KAFKA_HOME=/opt/kafka
+
+back=`ps ax | grep -i 'kafka\.Kafka' | grep java | grep -v grep | awk '{print $1}'`
+
+start(){
+ if [ -z "$back" ]; then
+ echo "Starting kafka..."
+ nohup ${KAFKA_HOME}/bin/kafka-server-start.sh -daemon ${KAFKA_HOME}/config/server.properties > ${KAFKA_HOME}/kafka.log 2>&1 &
+ else
+ echo "Cannot start! Kafka is already running."
+ fi
+
+ sleep 1
+ a=`ps ax | grep -i 'kafka\.Kafka' | grep java | grep -v grep | awk '{print $1}'`
+ if [ -n "$a" ]; then
+ echo "kafka started."
+ else
+ echo "kafka don't start!"
+ fi
+}
+
+stop(){
+ if [ -n "$back" ]; then
+ echo "Shutting down kafka..."
+ ${KAFKA_HOME}/bin/kafka-server-stop.sh
+# until [ -z "$back" ]; do :; done
+# echo "Kafka has stopped."
+ else
+ echo "Cannot stop! Kafka is not running."
+ fi
+
+ sleep 1
+ b=`ps ax | grep -i 'kafka\.Kafka' | grep java | grep -v grep | awk '{print $1}'`
+ if [ -z "$b" ]; then
+ echo "kafka stoped."
+ else
+ echo "kafka don't stop!"
+ fi
+}
+
+restart(){
+ if [ -n "$back" ]; then
+ echo "Now shutting down kafka..."
+ ${KAFKA_HOME}/bin/kafka-server-stop.sh
+ sleep 1
+ echo "Now starting kafka..."
+ nohup ${KAFKA_HOME}/bin/kafka-server-start.sh -daemon ${KAFKA_HOME}/config/server.properties > ${KAFKA_HOME}/kafka.log 2>&1 &
+ else
+ echo "Kafka has already stopped. Now starting kafka..."
+ nohup ${KAFKA_HOME}/bin/kafka-server-start.sh -daemon ${KAFKA_HOME}/config/server.properties > ${KAFKA_HOME}/kafka.log 2>&1 &
+ fi
+ 
+ sleep 1
+ b=`ps ax | grep -i 'kafka\.Kafka' | grep java | grep -v grep | awk '{print $1}'`
+ if [ -z "$b" ]; then
+ echo "kafka cannnot start!"
+ else
+ echo "kafka started."
+ fi
+}
+
+status(){
+ if [ -n "$back" ]; then
+ echo "Kafka is running."
+ else
+ echo "Kafka is not running."
+ fi
+}
+
+case "$1" in
+ start)
+ start
+ ;;
+ stop)
+ stop
+ ;;
+ restart)
+ restart
+ ;;
+ status)
+ status
+ ;;
+ *)
+ echo "Usage: $0 {start|stop|status}"
+ esac
+
+exit 0
