@@ -4,11 +4,11 @@
 #
 
 unless broker_attribute?(:broker, :id)
-  node.default.kafka.broker.broker_id = node.ipaddress.gsub('.', '').to_i % 2**31
+  node.default.kafka.broker.broker_id = 0
 end
 
 unless broker_attribute?(:port)
-  node.default.kafka.broker.port = 6667
+  node.default.kafka.broker.port = 9200
 end
 
 unless node.kafka.gc_log_opts
