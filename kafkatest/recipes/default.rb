@@ -3,7 +3,7 @@
 # Recipe:: default
 #
 
-include_recipe 'kafka::_defaults'
-include_recipe 'kafka::_setup'
-include_recipe 'kafka::_install'
-include_recipe 'kafka::_configure'
+include_recipe 'kafkatest::_defaults'
+include_recipe 'kafkatest::_setup'
+include_recipe 'kafkatest::_install'
+include_recipe 'kafkatest::_configure'
