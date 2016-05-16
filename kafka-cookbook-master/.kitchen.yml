@@ -1,0 +1,88 @@
+---
+driver:
+  name: vagrant
+  vagrantfiles:
+    - 'vagrantfiles/cachier.rb'
+  box_check_update: false
+  customize:
+    memory: 1024
+    cpus: 2
+verifier:
+  root_path: '/tmp/vagrant-cache/busser'
+provisioner:
+  name: 'chef_solo'
+  require_chef_omnibus: <%= ENV.fetch('CHEF_VERSION', '11.16.4').inspect %>
+  chef_omnibus_install_options: '-d /tmp/vagrant-cache/omnibus'
+  solo_rb:
+    file_cache_path: '/tmp/vagrant-cache/chef'
+    ssl_verify_mode: :verify_peer
+  attributes:
+    java:
+      jdk_version: 7
+    kafka:
+      version: <%= ENV.fetch('KAFKA_VERSION', '0.8.1.1').inspect %>
+      scala_version: <%= ENV.fetch('SCALA_VERSION', '2.10').inspect %>
+      checksum: <%= ENV.fetch('KAFKA_CHECKSUM', '').inspect %>
+      md5_checksum: <%= ENV.fetch('KAFKA_MD5', '').inspect %>
+      ulimit_file: 128000
+      broker:
+        broker:
+          id: 1
+        controlled:
+          shutdown:
+            enable: <%= ENV.fetch('KAFKA_CTRL_SHUTDOWN', false) %>
+        log:
+          dirs: ['/mnt/kafka-logs-1', '/mnt/kafka-logs-2']
+        zookeeper_connect: ['localhost:2181']
+      log4j:
+        appenders:
+          zookeeperAppender:
+            type: 'org.apache.log4j.FileAppender'
+            file: '/var/log/kafka/zookeeper.log'
+            layout:
+              type: 'org.apache.log4j.PatternLayout'
+              conversion_pattern: '[%d] %p %m (%c)%n'
+        loggers:
+          org.apache.zookeeper:
+            level: 'INFO'
+            appender: 'zookeeperAppender'
+            additivity: false
+platforms:
+  - name: centos-6.7
+  - name: centos-7.2
+  - name: debian-7.8
+    run_list:
+      - recipe[apt]
+  - name: ubuntu-14.04
+    run_list:
+      - recipe[apt]
+  - name: fedora-21
+    attributes:
+      java:
+        jdk_version: 8
+suites:
+  - name: init-style-upstart
+    run_list:
+      - recipe[java]
+      - recipe[kafka]
+    includes:
+      - ubuntu-14.04
+    attributes:
+      kafka:
+        init_style: 'upstart'
+  - name: init-style-sysv
+    run_list:
+      - recipe[java]
+      - recipe[kafka]
+    excludes:
+      - centos-7.2
+  - name: init-style-systemd
+    run_list:
+      - recipe[java]
+      - recipe[kafka]
+    includes:
+      - fedora-21
+      - centos-7.2
+    attributes:
+      kafka:
+        init_style: 'systemd'
