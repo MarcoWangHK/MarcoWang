@@ -3,7 +3,7 @@
 # Recipe:: _install
 #
 
-include_recipe "java" if node["apache_kafka"]["install_java"]
+include_recipe "java"
 
 kafka_download kafka_local_download_path do
   source kafka_download_uri(kafka_tar_gz)
