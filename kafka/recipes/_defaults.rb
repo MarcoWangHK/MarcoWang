@@ -11,6 +11,10 @@ unless broker_attribute?(:port)
   node.default.kafka.broker.port = 6667
 end
 
+unless broker_attribute?(:networkthreads)
+  node.default.kafka.broker.num.network.threads = 5
+end
+
 unless node.kafka.gc_log_opts
   node.default.kafka.gc_log_opts = %W[
     -Xloggc:#{::File.join(node.kafka.log_dir, 'kafka-gc.log')}
