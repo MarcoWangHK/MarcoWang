@@ -19,30 +19,6 @@ unless broker_attribute?(:iothreads)
   node.default.kafka.broker.num.io.threads = 8
 end
 
-unless broker_attribute?(:sendbuffer)
-  node.default.kafka.broker.socket.send.buffer.bytes = 102400
-end
-
-unless broker_attribute?(:receivebuffer)
-  node.default.kafka.broker.socket.receive.buffer.bytes = 102400
-end
-
-unless broker_attribute?(:requestmax)
-  node.default.kafka.broker.socket.request.max.bytes = 104857600
-end
-
-unless broker_attribute?(:logdirs)
-  node.default.kafka.broker.log.dirs = '/var/kafka-logs'
-end
-
-unless broker_attribute?(:recoverythreads)
-  node.default.kafka.broker.num.recovery.threads.per.data.dir = 1
-end
-
-unless broker_attribute?(:autocreatetopics)
-  node.default.kafka.broker.auto.create.topics.enable = 'false'
-end
-
 unless broker_attribute?(:deletetopicenable)
   node.default.kafka.broker.delete.topic.enable = 'true'
 end
