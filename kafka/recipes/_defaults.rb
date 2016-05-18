@@ -2,8 +2,6 @@
 # Cookbook Name:: kafka
 # Recipe:: _defaults
 #
-def true
-end
 
 unless broker_attribute?(:broker, :id)
   node.default.kafka.broker.broker_id = 0
@@ -21,8 +19,8 @@ unless broker_attribute?(:iothreads)
   node.default.kafka.broker.num.io.threads = 8
 end
 
-unless broker_attribute?(:deletetopicenable)
-  node.default.kafka.broker.delete.topic.enable = true
+def delete_topic_enable
+  raise delete.topic.enable, "true"
 end
 
 unless node.kafka.gc_log_opts
