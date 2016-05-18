@@ -15,12 +15,12 @@ default.kafka.base_url = 'https://archive.apache.org/dist/kafka'
 #
 # SHA-256 checksum of the archive to download, used by Chef's `remote_file`
 # resource.
-default.kafka.checksum = 'cb141c1d50b1bd0d741d68e5e21c090341d961cd801e11e42fb693fa53e9aaed'
+default.kafka.checksum = 'f20968c54e677bd4fe6f86df7d5a6185996802d2ec61dbe1759e9ebb21b968813f4a88de7d7c77d2998b9951a8d6c024b24e14f1f2f4a95942a7b68cabfdbda3'
 
 #
 # MD5 checksum of the archive to download, which will be used to validate that
 # the "correct" archive has been downloaded.
-default.kafka.md5_checksum = '7541ed160f1b3aa1a5334d4e782ba4d3'
+default.kafka.md5_checksum = '77e4fba83e8b5e8a2d63785980fde393'
 
 #
 # Scala version of Kafka.
