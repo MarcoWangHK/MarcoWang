@@ -19,7 +19,7 @@ unless broker_attribute?(:iothreads)
   node.default.kafka.broker.num.io.threads = 8
 end
 
-def delete_topic_enable
+def deletetopicenable
   raise delete.topic.enable, "true"
 end
 
