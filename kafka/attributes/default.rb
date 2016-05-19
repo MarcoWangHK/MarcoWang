@@ -5,7 +5,7 @@
 
 #
 # Version of Kafka to install.
-default.kafka.version = '0.8.2.1'
+default.kafka.version = '0.8.1.1'
 
 #
 # Base URL for Kafka releases. The recipes will a download URL using the
