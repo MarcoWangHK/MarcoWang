@@ -19,8 +19,8 @@ unless broker_attribute?(:iothreads)
   node.default.kafka.broker.num.io.threads = 8
 end
 
-unless broker_attribute
-  node.default.kafka.broker.delete.topic.enable = true
+unless broker_attribute?(:abc)
+  delete.topic.enable = true
 end
 
 unless node.kafka.gc_log_opts
