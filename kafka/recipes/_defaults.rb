@@ -20,7 +20,7 @@ unless broker_attribute?(:iothreads)
 end
 
 unless broker_attribute?(:abc)
-  delete.topic.enable = true
+  node.default.kafka.delete.topic.enable = true
 end
 
 unless node.kafka.gc_log_opts
