@@ -23,6 +23,10 @@ unless broker_attribute?(:autocreatetopics)
   node.default.kafka.broker.auto.create.topics.enable = 'false'
 end
 
+unless broker_attribute?(:logdirs)
+  node.default.kafka.broker.log.dirs = '/var/kafka-logs'
+end
+
 unless node.kafka.gc_log_opts
   node.default.kafka.gc_log_opts = %W[
     -Xloggc:#{::File.join(node.kafka.log_dir, 'kafka-gc.log')}
