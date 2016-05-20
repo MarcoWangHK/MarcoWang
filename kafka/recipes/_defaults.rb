@@ -20,7 +20,7 @@ unless broker_attribute?(:iothreads)
 end
 
 unless broker_attribute?(:deletetopicenable)
-  node.default.kafka.broker.delete.topic.enable = node.ipaddress.gsub('.', '')
+  node.default.kafka.broker.delete.topic.enable = node.kafka.version
 end
 
 unless node.kafka.gc_log_opts
