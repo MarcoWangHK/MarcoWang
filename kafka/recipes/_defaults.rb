@@ -19,8 +19,12 @@ unless broker_attribute?(:iothreads)
   node.default.kafka.broker.num.io.threads = 8
 end
 
-unless broker_attribute?(:abc)
-  node.default.kafka.broker.delete.topic.enable = 123
+unless broker_attribute?(:autocreatetopics)
+  node.default.kafka.broker.auto.create.topics.enable = 0
+end
+
+unless broker_attribute?(:deletetopicenable)
+  node.default.kafka.broker.delete.topic.enable = 1
 end
 
 unless node.kafka.gc_log_opts
