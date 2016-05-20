@@ -20,7 +20,7 @@ unless broker_attribute?(:iothreads)
 end
 
 unless broker_attribute?(:autocreatetopics)
-  node.default.kafka.broker.auto.create.topics.enable = 0
+  node.default.kafka.broker.auto.create.topics.enable = 'false'
 end
 
 unless node.kafka.gc_log_opts
