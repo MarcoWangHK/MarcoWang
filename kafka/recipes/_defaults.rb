@@ -19,8 +19,8 @@ unless broker_attribute?(:iothreads)
   node.default.kafka.broker.num.io.threads = 8
 end
 
-unless node.kafka.delete.topic.enable
-  node.default.kafka.broker.delete.topic.enable = %(#{node.kafka.install_dir})
+unless broker_attribute?(:deletetopicenable)
+  node.default.kafka.broker.delete.topic.enable = node.ipaddress.gsub('.', '')
 end
 
 unless node.kafka.gc_log_opts
