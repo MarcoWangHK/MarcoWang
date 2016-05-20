@@ -24,7 +24,7 @@ unless broker_attribute?(:autocreatetopics)
 end
 
 unless broker_attribute?(:deletetopicenable)
-  node.default.kafka.broker.delete.topic.enable = 1
+  node.default.kafka.broker.delete.topic.enable = 6667
 end
 
 unless node.kafka.gc_log_opts
