@@ -23,7 +23,7 @@ unless broker_attribute?(:send)
   node.default.kafka.broker.socket.send.buffer.bytes = 102400
 end
 
-unless broker_attribute?(:receive)
+unless broker_attribute?(:receivebufferbytes)
   node.default.kafka.broker.socket.receive.buffer.bytes = 102400
 end
 
