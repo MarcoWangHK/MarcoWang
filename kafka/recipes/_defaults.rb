@@ -19,8 +19,8 @@ unless broker_attribute?(:iothreads)
   node.default.kafka.broker.num.io.threads = 8
 end
 
-unless broker_attribute?(:sendbufferbytes)
-  node.default.kafka.broker.'socket.send.buffer.bytes' = 102400
+unless broker_attribute?(:socketsend)
+  node.default.kafka.broker.socket.send.buffer.bytes = 102400
 end
 
 unless broker_attribute?(:receivebufferbytes)
