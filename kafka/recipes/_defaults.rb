@@ -32,7 +32,7 @@ unless broker_attribute?(:recoverythreads)
 end
 
 unless broker_attribute?(:deletetopicenable)
-  node.default.kafka.broker.'delete.topic.enable' = 'true'
+  node.default.kafka.broker.delete.topic.enable = 'true'
 end
 
 unless node.kafka.gc_log_opts
