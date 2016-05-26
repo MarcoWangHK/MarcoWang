@@ -31,8 +31,8 @@ unless broker_attribute?(:recoverythreads)
   node.default.kafka.broker.num.recovery.threads.per.data.dir = 1
 end
 
-unless broker_attribute?(:deletetopicenable)
-  node.default.kafka.broker.delete.topic.enable = 1
+unless broker_attribute?(:shanchutopic)
+  node.default.kafka.broker.delete.topic.enable = 'true'
 end
 
 unless node.kafka.gc_log_opts
