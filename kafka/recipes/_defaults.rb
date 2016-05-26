@@ -32,7 +32,8 @@ unless broker_attribute?(:recoverythreads)
 end
 
 unless broker_attribute?(:shanchutopic)
-  node.default.kafka.broker."delete".topic.enable = 'true'
+  word1 = "delete"
+  node.default.kafka.broker.#{word1}.topic.enable = 'true'
 end
 
 unless node.kafka.gc_log_opts
