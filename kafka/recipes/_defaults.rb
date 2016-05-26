@@ -35,6 +35,10 @@ unless broker_attribute?(:deletetopicenable)
   node.default.kafka.broker.delete.topic.enable = 'true'
 end
 
+unless broker_attribute?(:deletetopicenable)
+  node.default.kafka.broker.delete.topic.enable = 1
+end
+
 unless node.kafka.gc_log_opts
   node.default.kafka.gc_log_opts = %W[
     -Xloggc:#{::File.join(node.kafka.log_dir, 'kafka-gc.log')}
